@@ -11,7 +11,7 @@
 
 :root {
 	--main-color: #03a9f4;
-	--main-transition: 0.3s;
+	--main-transition: 0.25s;
 	--main-padding: 50px
 }
 
@@ -95,6 +95,7 @@ div h2 {
 	width: 50px;
 }
 
+
 .nav a {
 	display: block;
 	width: 20px;
@@ -147,7 +148,7 @@ div h2 {
 .landing {
 	background-image: url(../imgs/01.jpg);
 	background-size: cover;
-	min-height: 100vh;
+	min-height: 100dvh;
 }
 
 .landing .overley {
@@ -162,7 +163,7 @@ div h2 {
 .landing header {
 	display: flex;
 	justify-content: space-between;
-	padding: 10px 0;
+	padding: 10px 15px;
 	z-index: 2;
 	position: relative;
 	color: white;
@@ -171,26 +172,156 @@ div h2 {
 
 .landing header .logo {
 	font-weight: bold;
+	width: 300px;
+	font-size: 15px;
 }
 
-.landing header ul {
-	display: flex;
-	gap: 15px;
-	margin: 16px 0;
+
+
+@media (min-width:992px) {
+	.landing header ul {
+		display: flex;
+		justify-content: flex-end;
+		gap: 15px;
+		margin: 16px 0;
+	}
+
+	.landing header ul li a {
+		color: white;
+		transition: var(--main-transition);
+	}
+
+	.landing header ul li a:hover {
+		color: var(--main-color);
+	}
+
+	.landing header .menu {
+		display: none;
+	}
 }
 
-.landing header li a {
-	color: white;
-	transition: var(--main-transition);
+@media (max-width:991px) {
+	.landing header ul {
+		transition: var(--main-transition);
+	}
+
+	.landing header {
+		padding-right: 23px;
+	}
+
+	.landing header .menu {
+		display: inline-block;
+		position: relative;
+		width: 25px;
+		height: 25px;
+		cursor: pointer;
+		transition: var(--main-transition);
+		perspective: 800px;
+
+	}
+
+	.landing header .menu span {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: white;
+		border-radius: 10px;
+		position: absolute;
+		transition: all var(--main-transition);
+		transition-timing-function: ease-in-out;
+		transform-style: preserve-3d;
+
+		&:nth-child(1) {
+			top: 0;
+		}
+
+		&:nth-child(2) {
+			top: 13px;
+			transform: translateY(-100%);
+		}
+
+		&:nth-child(3) {
+			top: 25px;
+			transform: translateY(-100%);
+		}
+	}
+
+	.landing header .menu.active {
+		& span:nth-child(1) {
+			top: 13px;
+			transform: rotate(135deg);
+		}
+
+		& span:nth-child(2) {
+			transform: translate(-100%, -100%);
+			opacity: 0;
+		}
+
+		& span:nth-child(3) {
+			top: 13px;
+			transform: rotate(-135deg);
+		}
+
+		& span:nth-child(3),
+		& span:nth-child(1) {
+			background-color: #ff5722;
+		}
+	}
+
+	.landing header .menu+ul {
+		z-index: 1000;
+		background-color: white;
+		width: 100%;
+		left: 0;
+		top: 60px;
+		text-align: left;
+		padding: 20px;
+		border-radius: 20px;
+
+		& li a {
+			display: block;
+			width: 100%;
+			color: var(--main-color);
+			padding: 15px;
+			font-size: 20px;
+			border-bottom: 2px solid #eee;
+		}
+	}
+
+	.landing header ul {
+		opacity: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+
+	.landing header ul::before {
+		content: "";
+		border: 15px solid white;
+		position: absolute;
+		top: 0;
+		transform: translateY(-100%);
+		right: 20px;
+		border-color: transparent transparent white transparent;
+	}
+
+	.landing header .menu.active+ul {
+		opacity: 1;
+		position: absolute;
+		pointer-events: auto;
+	}
 }
 
-.landing header li a:hover {
-	color: var(--main-color);
+.links-container {
+	width: 100%;
+	text-align: right;
 }
+
+/* .landing header .men */
+
 
 .landing .intro-text {
 	position: absolute;
-	z-index: 2;
+	z-index: 1;
 	color: white;
 	position: absolute;
 	top: 50%;
@@ -222,6 +353,13 @@ div h2 {
 	display: flex;
 }
 
+@media (max-width:767px) {
+	.about .container {
+		flex-direction: column-reverse;
+		text-align: center;
+	}
+}
+
 .about-us .info-box p {
 	line-height: 1.8;
 	color: #767676;
@@ -238,6 +376,12 @@ div h2 {
 	font-size: 30px;
 	color: var(--main-color);
 	margin: 0 0 10px;
+}
+
+@media (max-width:767px) {
+	.about .info-box h2 {
+		margin: 0 auto 10px;
+	}
 }
 
 .about .info-box p {
@@ -306,10 +450,14 @@ div h2 {
 
 .gallery .imgs-box {
 	text-align: center;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 10px;
 }
 
 .gallery .imgs-box img {
-	width: 200px;
+	/* width: 200px; */
+	max-width: 100%;
 	padding: 5px;
 	margin: 5px;
 	border: 2px solid #ccc;
