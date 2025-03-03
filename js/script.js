@@ -74,17 +74,32 @@ if (backgroundOption === "true") {
 	});
 }
 
-// Bullets Navgition
-document.querySelector(".menu").onclick = function () {
+// Menu Navgition
+document.querySelector(".landing header .menu").onclick = function (event) {
+	event.stopPropagation();
+
 	this.classList.toggle("active");
 };
+
+addEventListener(
+	"click",
+	function (event) {
+		if (
+			!event.target.matches(".landing header .menu+ul")&&
+			!event.target.matches(".landing header .menu")
+		) {
+			document.querySelector(".landing header .menu").classList.remove("active")
+		}
+	}
+)
+
 
 // Open And Close SideBar
 document.querySelector(".settings-box .open-button ").onclick = function () {
 	document.querySelector(".settings-box ").classList.toggle("open");
 	document
 		.querySelector(".settings-box .open-button i")
-		.classList.add("fa-spin");
+		.classList.toggle("fa-spin");
 		document.body.classList.toggle("remove-scrolling")
 };
 
