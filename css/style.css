@@ -10,7 +10,7 @@
 }
 
 :root {
-	--main-color: #03a9f4;
+	--main-color: #FF9800;
 	--main-transition: 0.25s;
 	--main-padding: 50px
 }
@@ -84,6 +84,108 @@ div h2 {
 
 /* End Globlal Roles */
 
+/* Start Settings And Overley */
+
+.settings-box {
+	position: fixed;
+	left: -200px;
+	transition: var(--main-transition);
+	background-color: white;
+	z-index: calc(1920 * 1080);
+	width: 200px;
+	padding: 10px;
+	height: 100dvh;
+}
+
+.settings-box.open {
+	left: 0px;
+}
+
+.settings-box .open-button {
+	position: absolute;
+	left: 200px;
+	top: 200px;
+	padding: 10px;
+	cursor: pointer;
+	border-radius: 0 20px 20px 0;
+	background-color: white;
+}
+
+.settings-box .settings-container div.select-color ul {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.settings-box .settings-container div.select-color li {
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.settings-box .settings-container div:not(:last-child) {
+	text-align: center;
+	background-color: #eeeeee;
+	padding: 10px;
+	margin-bottom: 15px;
+	border-radius: 20px;
+}
+
+.settings-box .settings-container div:not(:last-child) h4 {
+	color: #666;
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.settings-box .settings-container div:not(:last-child)>.yes-or-no span {
+	padding: 10px;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 14px;
+	color: white;
+	font-weight: bold;
+	border-radius: 20px;
+	background-color: var(--main-color);
+	transition: var(--main-transition);
+	opacity: 0.5;
+}
+
+.settings-box .settings-container div:not(:last-child)>.yes-or-no .active {
+	opacity: 1;
+}
+
+.settings-box .settings-container .reset {
+	background-color: #f44336;
+	text-align: center;
+	padding: 10px 20px;
+	font-weight: bold;
+	color: white;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+.remove-scrolling {
+	height: 100%;
+	overflow: hidden;
+}
+
+body .settings-box+.overley {
+	position: fixed;
+	width: 100dvw;
+	height: 100dvh;
+	top: 0;
+	z-index: 10;
+	left: 0;
+	transition: var(--main-transition);
+}
+
+body .settings-box.open+.overley {
+	background-color: rgb(0 0 0 / 30%);
+}
+
+/* End Settings And Overley */
+
+
 /* Start Nav Bar */
 
 .nav {
@@ -91,7 +193,7 @@ div h2 {
 	right: 0;
 	top: 50%;
 	transform: translateY(-50%);
-	z-index: 999;
+    z-index: 9;
 	width: 50px;
 }
 
@@ -417,6 +519,14 @@ div h2 {
 	margin-bottom: 20px;
 }
 
+@media (max-width:767px) {
+	.skills .skill {
+		flex-direction: column;
+		align-items: center;
+		gap: 20px;
+	}
+}
+
 .skills .skill .skill-name {
 	font-weight: bold;
 	text-align: center;
@@ -427,10 +537,12 @@ div h2 {
 
 .skills .skill .skill-progress {
 	background-color: #f6f6f6;
-	flex-grow: 1;
+	width: 100%;
+	height: 30px;
 	position: relative;
 	border-radius: 20px;
 }
+
 
 .skills .skill .skill-progress span {
 	content: "";
@@ -468,3 +580,6 @@ div h2 {
 
 
 /* End Gallery */
+
+
+/* Start  */
