@@ -6,6 +6,10 @@ if (color !== null) {
 	document.querySelector(
 		`.settings-box .settings-container div.select-color li[data-color="${color}"]`
 	).style.border = "5px solid white";
+}else {
+	document.querySelector(
+		`.settings-box .settings-container div.select-color li[data-color="#FF9800"]`
+	).style.border = "5px solid white";
 }
 // Change Color Of Color Selector
 
