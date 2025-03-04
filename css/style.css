@@ -801,10 +801,16 @@ body .settings-box.open+.overley {
 	transform: translate(-50%, -50%);
 	background-color: #FFF;
 	border: 1px solid #CCC;
-	padding: 20px 10px;
+	padding: 20px;
 	z-index: 1001;
 	opacity: 0;
 	border-radius: 20px;
+}
+
+@media (max-width:767px) {
+	.popup {
+		padding: 20px 10px;
+	}
 }
 
 .popup h3 {
