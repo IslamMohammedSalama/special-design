@@ -114,6 +114,7 @@ div h2 {
 	cursor: pointer;
 	border-radius: 0 20px 20px 0;
 	background-color: white;
+	box-shadow: 5px 2px 6px #ddd;
 }
 
 .settings-box .settings-container div.select-color ul {
@@ -126,6 +127,8 @@ div h2 {
 	height: 24px;
 	border-radius: 50%;
 	cursor: pointer;
+	border: 5px solid transparent;
+	transition: var(--main-transition);
 }
 
 .settings-box .settings-container div:not(:last-child) {
@@ -355,6 +358,7 @@ body .settings-box.open+.overley {
 
 	.landing header .menu.active {
 		z-index: 15;
+
 		& span:nth-child(1) {
 			top: 13px;
 			transform: rotate(135deg);
@@ -587,4 +591,248 @@ body .settings-box.open+.overley {
 /* End Gallery */
 
 
-/* Start  */
+/* Start TimeLine */
+.timeline {
+	background-color: #eee;
+	padding: var(--main-padding) 0;
+}
+
+.timeline .container {
+	position: relative;
+	overflow: hidden;
+}
+
+.timeline .container::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 0;
+	transform: translateX(-50%);
+	height: 100%;
+	width: 2px;
+	background-color: var(--main-color);
+}
+
+.timeline .year {
+	position: relative;
+	margin: 20px auto;
+	background-color: var(--main-color);
+	padding: 5px 10px;
+	border-radius: 10px;
+	color: white;
+	font-weight: bold;
+	width: fit-content;
+}
+
+
+.timeline .left {
+	float: left;
+}
+
+.timeline .right {
+	float: right;
+}
+
+
+.timeline .left,
+.timeline .right {
+	width: calc(50% - 20px);
+	margin-bottom: 40px;
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	position: relative;
+	transition: var(--main-transition);
+}
+
+.timeline .left::before {
+	right: -30px;
+
+}
+
+.timeline .right::before {
+	left: -30px;
+}
+
+.timeline .left::before,
+.timeline .right::before {
+	pointer-events: auto;
+	opacity: 1;
+	content: "";
+	position: absolute;
+	top: 20px;
+	border-radius: 50%;
+	border: 2px solid var(--main-color);
+	background-color: white;
+	width: 14px;
+	height: 14px;
+	box-sizing: content-box;
+	transition: var(--main-transition);
+}
+
+
+
+.timeline .left .content::before,
+.timeline .right .content::before {
+	content: "";
+	pointer-events: auto;
+	opacity: 1;
+	position: absolute;
+	border: 10px solid;
+	border-color: red green blue yellow;
+}
+
+
+.timeline .left .content::before {
+	right: -20px;
+	border-color: transparent transparent transparent white;
+}
+
+.timeline .right .content::before {
+	left: -20px;
+	border-color: transparent white transparent transparent;
+}
+
+.timeline .left h3,
+.timeline .right h3 {
+	font-weight: bold;
+	margin: 0 0 10px;
+	color: var(--main-color);
+}
+
+
+.timeline .left p,
+.timeline .right p {
+	color: #666;
+	line-height: 1.6;
+}
+
+.timeline .clearfix {
+	clear: both;
+}
+
+@media (max-width: 767px) {
+
+	.timeline .left,
+	.timeline .right {
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	.timeline div:before,
+	.timeline div .content:before {
+		display: none;
+		pointer-events: none;
+		opacity: 0;
+	}
+}
+
+/* End TimeLine */
+
+/* Start Features */
+.features {
+	padding: var(--main-padding) 0;
+}
+
+.features .container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	row-gap: 40px;
+}
+
+.features .feature {
+	text-align: center;
+}
+
+.features .feature img {
+	width: 96px;
+}
+
+.features .feature h4 {
+	position: relative;
+	font-size: 22px;
+	margin: 15px 0 40px;
+}
+
+.features .feature h4::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: -22px;
+	margin-left: -20px;
+	width: 40px;
+	height: 4px;
+	border-radius: 10px;
+	background-color: var(--main-color);
+}
+
+.features .feature p {
+	color: #666;
+	margin: 0 auto;
+	line-height: 1.7;
+	width: 80%;
+}
+
+/* End Features */
+
+/* End PopUp */
+
+.popup-overlay {
+	position: fixed;
+	background-color: rgba(0, 0, 0, .7);
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	transition: var(--main-transition);
+	opacity: 0;
+}
+
+.popup {
+	transition: var(--main-transition);
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #FFF;
+	border: 1px solid #CCC;
+	padding: 20px 10px;
+	z-index: 1001;
+	opacity: 0;
+	border-radius: 20px;
+}
+
+.popup h3 {
+	font-weight: bold;
+	text-align: center;
+	margin: 0 0 20px;
+	color: var(--main-color);
+}
+
+.popup img {
+	min-width: 300px;
+	max-width: 100%;
+	border-radius: 20px;
+}
+
+.close-button {
+	position: absolute;
+	top: 7px;
+	right: 10px;
+	background-color: var(--main-color);
+	width: 30px;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 17px;
+	color: #FFF;
+	cursor: pointer;
+	font-weight: bold;
+	font-family: Arial, Tahoma;
+	border-radius: 50%;
+}
+
+/* End PopUp */

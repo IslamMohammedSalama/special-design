@@ -5,7 +5,7 @@ if (color !== null) {
 	document.documentElement.style.setProperty("--main-color", color);
 	document.querySelector(
 		`.settings-box .settings-container div.select-color li[data-color="${color}"]`
-	).style.border = "2px solid white";
+	).style.border = "5px solid white";
 }
 // Change Color Of Color Selector
 
@@ -19,7 +19,7 @@ document
 					".settings-box .settings-container div.select-color li"
 				)
 				.forEach((ele) => (ele.style.border = "none"));
-			element.style.border = "2px solid white";
+			element.style.border = "5px solid white";
 			window.localStorage.setItem("accent-color", element.dataset.color);
 			document.documentElement.style.setProperty(
 				"--main-color",
@@ -81,18 +81,14 @@ document.querySelector(".landing header .menu").onclick = function (event) {
 	this.classList.toggle("active");
 };
 
-addEventListener(
-	"click",
-	function (event) {
-		if (
-			!event.target.matches(".landing header .menu+ul")&&
-			!event.target.matches(".landing header .menu")
-		) {
-			document.querySelector(".landing header .menu").classList.remove("active")
-		}
+addEventListener("click", function (event) {
+	if (
+		!event.target.matches(".landing header .menu+ul") &&
+		!event.target.matches(".landing header .menu")
+	) {
+		document.querySelector(".landing header .menu").classList.remove("active");
 	}
-)
-
+});
 
 // Open And Close SideBar
 document.querySelector(".settings-box .open-button ").onclick = function () {
@@ -100,7 +96,7 @@ document.querySelector(".settings-box .open-button ").onclick = function () {
 	document
 		.querySelector(".settings-box .open-button i")
 		.classList.toggle("fa-spin");
-		document.body.classList.toggle("remove-scrolling")
+	document.body.classList.toggle("remove-scrolling");
 };
 
 addEventListener("click", function (event) {
@@ -112,7 +108,7 @@ addEventListener("click", function (event) {
 		document
 			.querySelector(".settings-box .open-button i")
 			.classList.remove("fa-spin");
-		this.document.body.classList.remove("remove-scrolling")
+		this.document.body.classList.remove("remove-scrolling");
 		this.document.querySelector(".settings-box").classList.remove("open");
 	}
 });
@@ -131,8 +127,7 @@ if (bulletsOption === "false") {
 		}
 	});
 	document.querySelector(".nav ").style.display = "none";
-}
- else {
+} else {
 	spansTwo.forEach((ele) => {
 		ele.classList.remove("active");
 		if (ele.classList.contains("yes")) {
@@ -164,10 +159,11 @@ document.querySelector(".reset").onclick = function () {
 	document
 		.querySelectorAll(".settings-box .settings-container div.select-color li")
 		.forEach((ele) => {
-			ele.style.border = "none";
 			if (ele.dataset.color === "#FF9800") {
 				console.log(ele);
-				ele.style.border = "2px solid white";
+				ele.style.border = "5px solid white";
+			} else {
+				ele.style.border = "none";
 			}
 		});
 
@@ -191,3 +187,49 @@ document.querySelector(".reset").onclick = function () {
 	});
 	document.querySelector(".nav ").style.display = "block";
 };
+
+// Show Popup For User on Click Any Image From Gallery
+
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+document.querySelectorAll(".gallery .imgs-box img").forEach(function (img) {
+	img.onclick = async function () {
+		let overlay = document.createElement("div");
+		document.body.append(overlay);
+		let popup = document.createElement("div");
+		document.body.append(popup);
+		let h3 = document.createElement("h3");
+		h3.innerText = img.alt ;
+		popup.append(h3);
+		let ourImg = document.createElement("img");
+		popup.append(ourImg);
+		let closeBtn = document.createElement("span");
+		closeBtn.textContent = "X";
+		popup.append(closeBtn);
+		document.body.classList.add("remove-scrolling");
+
+		overlay.className = "popup-overlay";
+		popup.className = "popup";
+		ourImg.src = img.src;
+		closeBtn.className = "close-button";
+		await delay(0);
+		popup.style.opacity = "1";
+		overlay.style.opacity = "1";
+		closeBtn.onclick = async function (event) {
+			popup.style.opacity = "0";
+			overlay.style.opacity = "0";
+			await delay(250);
+			overlay.remove();
+			popup.remove();
+			document.body.classList.remove("remove-scrolling");
+		};
+		overlay.onclick = async function (event) {
+			popup.style.opacity = "0";
+			overlay.style.opacity = "0";
+			await delay(250);
+			overlay.remove();
+			popup.remove();
+			document.body.classList.remove("remove-scrolling");
+		};
+	};
+});
