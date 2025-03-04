@@ -207,12 +207,12 @@ document.querySelectorAll(".gallery .imgs-box img").forEach(function (img) {
 		h3.innerText = img.alt;
 		popup.append(h3);
 		let ourImg = document.createElement("img");
+		ourImg.src = img.src;
 		popup.append(ourImg);
 		let closeBtn = document.createElement("span");
 		closeBtn.textContent = "X";
 		popup.append(closeBtn);
 		document.body.classList.add("remove-scrolling");
-		ourImg.src = img.src;
 
 		overlay.className = "popup-overlay";
 		popup.className = "popup";
