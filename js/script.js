@@ -32,6 +32,14 @@ document
 let backgroundOption = window.localStorage.getItem("background-option");
 let backgroundInterval;
 
+function randomBackgrounds() {
+	return setInterval(() => {
+		let random = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+		landing.style.backgroundImage = `url(imgs/0${random}.jpg)`;
+		delete random;
+	}, 5000);
+}
+
 let spansOne = document.querySelectorAll(
 	".settings-box .settings-container div:nth-child(2)>.yes-or-no span"
 );
@@ -47,14 +55,11 @@ spansOne.forEach((ele) => {
 		} else {
 			backgroundOption = true;
 			localStorage.setItem("background-option", true);
-			backgroundInterval = setInterval(() => {
-				let random = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
-				landing.style.backgroundImage = `url(../imgs/0${random}.jpg)`;
-				delete random;
-			}, 5000);
+			backgroundInterval = randomBackgrounds()
 		}
 	};
 });
+
 let landing = document.querySelector(".landing");
 if (backgroundOption === "true") {
 	spansOne.forEach((ele) => {
@@ -62,16 +67,19 @@ if (backgroundOption === "true") {
 		if (ele.classList.contains("yes")) ele.classList.add("active");
 	});
 
-	backgroundInterval = setInterval(() => {
-		let random = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
-		landing.style.backgroundImage = `url(../imgs/0${random}.jpg)`;
-		delete random;
-	}, 5000);
-} else {
+	backgroundInterval = randomBackgrounds()
+} else if (backgroundOption === "false") {
 	spansOne.forEach((ele) => {
 		ele.classList.remove("active");
 		if (ele.classList.contains("no")) ele.classList.add("active");
 	});
+} else {
+	spansOne.forEach((ele) => {
+		ele.classList.remove("active");
+		if (ele.classList.contains("yes")) ele.classList.add("active");
+	});
+
+	backgroundInterval = randomBackgrounds()
 }
 
 // Menu Navgition
@@ -172,11 +180,8 @@ document.querySelector(".reset").onclick = function () {
 		ele.classList.remove("active");
 		if (ele.classList.contains("yes")) ele.classList.add("active");
 	});
-	backgroundInterval = setInterval(() => {
-		let random = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
-		landing.style.backgroundImage = `url(../imgs/0${random}.jpg)`;
-		delete random;
-	}, 5000);
+	backgroundInterval = randomBackgrounds()
+
 
 	window.localStorage.setItem("show-bullets", "true");
 	spansTwo.forEach((ele) => {
@@ -199,7 +204,7 @@ document.querySelectorAll(".gallery .imgs-box img").forEach(function (img) {
 		let popup = document.createElement("div");
 		document.body.append(popup);
 		let h3 = document.createElement("h3");
-		h3.innerText = img.alt ;
+		h3.innerText = img.alt;
 		popup.append(h3);
 		let ourImg = document.createElement("img");
 		popup.append(ourImg);
@@ -234,20 +239,19 @@ document.querySelectorAll(".gallery .imgs-box img").forEach(function (img) {
 	};
 });
 
+// Add Animation On Scrollin to Progresss
 
-// Add Animation On Scrollin to Progresss 
-
-let skills =  document.querySelector(".skills")
+let skills = document.querySelector(".skills");
 
 window.onscroll = function () {
 	let skillsOffSet = skills.offsetTop;
-	let skillsOuterHeight = skills.offsetHeight ;
-	let windowHeight  = this.innerHeight;
+	let skillsOuterHeight = skills.offsetHeight;
+	let windowHeight = this.innerHeight;
 	let windowScrollTop = this.scrollY;
-	if (windowScrollTop > (skillsOffSet + skillsOuterHeight - windowHeight)) {
-		console.log("Yes")
-		document.querySelectorAll(".skills span").forEach(
-			span => span.style.width = span.dataset.width
-		)
+	if (windowScrollTop > skillsOffSet + skillsOuterHeight - windowHeight) {
+		console.log("Yes");
+		document
+			.querySelectorAll(".skills span")
+			.forEach((span) => (span.style.width = span.dataset.width));
 	}
-}
+};
