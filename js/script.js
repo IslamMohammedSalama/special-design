@@ -233,3 +233,21 @@ document.querySelectorAll(".gallery .imgs-box img").forEach(function (img) {
 		};
 	};
 });
+
+
+// Add Animation On Scrollin to Progresss 
+
+let skills =  document.querySelector(".skills")
+
+window.onscroll = function () {
+	let skillsOffSet = skills.offsetTop;
+	let skillsOuterHeight = skills.offsetHeight ;
+	let windowHeight  = this.innerHeight;
+	let windowScrollTop = this.scrollY;
+	if (windowScrollTop > (skillsOffSet + skillsOuterHeight - windowHeight)) {
+		console.log("Yes")
+		document.querySelectorAll(".skills span").forEach(
+			span => span.style.width = span.dataset.width
+		)
+	}
+}

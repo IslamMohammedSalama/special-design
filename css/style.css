@@ -557,8 +557,12 @@ body .settings-box.open+.overley {
 	content: "";
 	background-color: var(--main-color);
 	height: 100%;
+	width: 0;
+	left: 0;
+	top: 0;
 	position: absolute;
 	border-radius: 20px;
+	transition: var(--main-transition);
 }
 
 /* End Skills */
@@ -811,7 +815,7 @@ body .settings-box.open+.overley {
 }
 
 .popup img {
-	min-width: 300px;
+	min-width: 280px;
 	max-width: 100%;
 	border-radius: 20px;
 }
