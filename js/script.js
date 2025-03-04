@@ -212,10 +212,10 @@ document.querySelectorAll(".gallery .imgs-box img").forEach(function (img) {
 		closeBtn.textContent = "X";
 		popup.append(closeBtn);
 		document.body.classList.add("remove-scrolling");
+		ourImg.src = img.src;
 
 		overlay.className = "popup-overlay";
 		popup.className = "popup";
-		ourImg.src = img.src;
 		closeBtn.className = "close-button";
 		await delay(0);
 		popup.style.opacity = "1";
