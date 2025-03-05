@@ -836,6 +836,12 @@ body .settings-box.open+.overley {
 	text-align: left;
 	margin-bottom: 30px;
 }
+@media (max-width:767px) {
+	.testimonials .container h2 {
+		text-align: center;
+		width: 100%;
+	}
+}
 
 .testimonials .ts-boxes {
 	display: grid;
