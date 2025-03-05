@@ -1,3 +1,5 @@
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 // Get Color From Local Storage
 
 let color = window.localStorage.getItem("accent-color");
@@ -6,7 +8,7 @@ if (color !== null) {
 	document.querySelector(
 		`.settings-box .settings-container div.select-color li[data-color="${color}"]`
 	).style.border = "5px solid white";
-}else {
+} else {
 	document.querySelector(
 		`.settings-box .settings-container div.select-color li[data-color="#FF9800"]`
 	).style.border = "5px solid white";
@@ -59,7 +61,7 @@ spansOne.forEach((ele) => {
 		} else {
 			backgroundOption = true;
 			localStorage.setItem("background-option", true);
-			backgroundInterval = randomBackgrounds()
+			backgroundInterval = randomBackgrounds();
 		}
 	};
 });
@@ -71,7 +73,7 @@ if (backgroundOption === "true") {
 		if (ele.classList.contains("yes")) ele.classList.add("active");
 	});
 
-	backgroundInterval = randomBackgrounds()
+	backgroundInterval = randomBackgrounds();
 } else if (backgroundOption === "false") {
 	spansOne.forEach((ele) => {
 		ele.classList.remove("active");
@@ -83,22 +85,40 @@ if (backgroundOption === "true") {
 		if (ele.classList.contains("yes")) ele.classList.add("active");
 	});
 
-	backgroundInterval = randomBackgrounds()
+	backgroundInterval = randomBackgrounds();
 }
 
 // Menu Navgition
-document.querySelector(".landing header .menu").onclick = function (event) {
+document.querySelector(".landing header .menu").onclick = async function (
+	event
+) {
 	event.stopPropagation();
-
-	this.classList.toggle("active");
+	if (this.classList.contains("active")) {
+		document.querySelector(".landing header .menu").classList.toggle("active");
+		await delay(250);
+		document
+			.querySelector(".landing header .menu + ul")
+			.classList.remove("add-animations");
+	} else {
+		document
+			.querySelector(".landing header .menu + ul")
+			.classList.add("add-animations");
+		await delay(0);
+		document.querySelector(".landing header .menu").classList.toggle("active");
+	}
 };
 
-addEventListener("click", function (event) {
+addEventListener("click", async function (event) {
 	if (
 		!event.target.matches(".landing header .menu+ul") &&
-		!event.target.matches(".landing header .menu")
+		!event.target.matches(".landing header .menu") &&
+		document.querySelector(".landing header .menu").classList.contains("active")
 	) {
 		document.querySelector(".landing header .menu").classList.remove("active");
+		await delay(250);
+		document
+			.querySelector(".landing header .menu + ul")
+			.classList.toggle("add-animations");
 	}
 });
 
@@ -184,8 +204,7 @@ document.querySelector(".reset").onclick = function () {
 		ele.classList.remove("active");
 		if (ele.classList.contains("yes")) ele.classList.add("active");
 	});
-	backgroundInterval = randomBackgrounds()
-
+	backgroundInterval = randomBackgrounds();
 
 	window.localStorage.setItem("show-bullets", "true");
 	spansTwo.forEach((ele) => {
@@ -199,12 +218,10 @@ document.querySelector(".reset").onclick = function () {
 
 // Show Popup For User on Click Any Image From Gallery
 
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
 document.querySelectorAll(".gallery .imgs-box img").forEach(function (img) {
 	img.onclick = async function () {
-		let overlay = document.createElement("div");
-		document.body.append(overlay);
+		let overley = document.createElement("div");
+		document.body.append(overley);
 		let popup = document.createElement("div");
 		document.body.append(popup);
 		let h3 = document.createElement("h3");
@@ -218,25 +235,25 @@ document.querySelectorAll(".gallery .imgs-box img").forEach(function (img) {
 		popup.append(closeBtn);
 		document.body.classList.add("remove-scrolling");
 
-		overlay.className = "popup-overlay";
+		overley.className = "popup-overley";
 		popup.className = "popup";
 		closeBtn.className = "close-button";
 		await delay(0);
 		popup.style.opacity = "1";
-		overlay.style.opacity = "1";
+		overley.style.opacity = "1";
 		closeBtn.onclick = async function (event) {
 			popup.style.opacity = "0";
-			overlay.style.opacity = "0";
+			overley.style.opacity = "0";
 			await delay(250);
-			overlay.remove();
+			overley.remove();
 			popup.remove();
 			document.body.classList.remove("remove-scrolling");
 		};
-		overlay.onclick = async function (event) {
+		overley.onclick = async function (event) {
 			popup.style.opacity = "0";
-			overlay.style.opacity = "0";
+			overley.style.opacity = "0";
 			await delay(250);
-			overlay.remove();
+			overley.remove();
 			popup.remove();
 			document.body.classList.remove("remove-scrolling");
 		};
@@ -259,3 +276,4 @@ window.onscroll = function () {
 			.forEach((span) => (span.style.width = span.dataset.width));
 	}
 };
+// 		transition: var(--main-transition);
