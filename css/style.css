@@ -833,14 +833,8 @@ body .settings-box.open+.overley {
 	color: white;
 	font-size: 30px;
 	font-weight: bold;
-	text-align: left;
+	text-align: center;
 	margin-bottom: 30px;
-}
-@media (max-width:767px) {
-	.testimonials .container h2 {
-		text-align: center;
-		width: 100%;
-	}
 }
 
 .testimonials .ts-boxes {
