@@ -423,9 +423,11 @@ body .settings-box.open+.overley {
 	}
 
 }
-	.add-animations {
-		transition: var(--main-transition);
-	}
+
+.add-animations {
+	transition: var(--main-transition);
+}
+
 .links-container {
 	width: 100%;
 	text-align: right;
@@ -685,6 +687,13 @@ body .settings-box.open+.overley {
 	transition: var(--main-transition);
 }
 
+@media (max-width:767px) {
+
+	.timeline .left .content,
+	.timeline .right .content {
+		text-align: center;
+	}
+}
 
 .timeline .left .content::before,
 .timeline .right .content::before {
@@ -851,6 +860,16 @@ body .settings-box.open+.overley {
 .testimonials .ts-box .info {
 	display: flex;
 	align-items: center;
+}
+
+@media (max-width:767px) {
+	.testimonials .ts-box .info {
+		flex-direction: column;
+	}
+
+	.testimonials .ts-box p {
+		text-align: center;
+	}
 }
 
 .testimonials .ts-box .info img {
